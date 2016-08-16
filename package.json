@@ -44,6 +44,7 @@
     "run-sequence": "^1.2.2",
     "semantic-ui": "^2.2.2",
     "vue": "^1.*",
+    "vue-resource": "^0.9.3",
     "yamljs": "^0.2.8"
   }
 }

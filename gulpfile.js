@@ -16,6 +16,7 @@ elixir(function(mix) {
         .scripts([
         	'./node_modules/jquery/dist/jquery.min.js',
         	'./node_modules/materialize-css/bin/materialize.js',
-        	'./node_modules/vue/dist/vue.js'
+        	'./node_modules/vue/dist/vue.js',
+        	'./node_modules/vue-resource/dist/vue-resource.js'
         ]);
 });

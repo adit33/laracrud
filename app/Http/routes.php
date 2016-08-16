@@ -14,5 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::group(['middleware' => ['web']], function () {
 Route::get('product','ProductController@index');
+Route::post('api/product','ProductController@store');
+Route::get('api','ProductController@apiIndex');
+});

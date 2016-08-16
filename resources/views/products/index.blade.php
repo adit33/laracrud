@@ -2,7 +2,6 @@
 
  @section('content')
 <div id="product">  <!-- Modal Trigger -->
-  
 Hello @{{ nama }}
   <a class="modal-trigger btn-floating btn-large waves-effect waves-light red" @click="addProduct" href="#modal1">Add<i class="material-icons"></i></a>
 
@@ -64,9 +63,12 @@ Hello @{{ nama }}
 
 @push('script')
 <script type="text/javascript">
-'use strict';
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getAttribute('value');
   new Vue({
     el:"#product",
+    ready:function(){
+    this.getProduct();
+    },
     data:function(){
       return  {
         nama:"Aditya",
@@ -76,12 +78,20 @@ Hello @{{ nama }}
       }
     },
     methods: {
+      getProduct:function(){
+        this.$http.get('api')
+          .then(function(data){
+            console.log(data)
+            this.$set('dataProduct',data);
+        });
+    },
       addProduct:function(){
         this.enable = true;
         this.inputDataProduct = {};
          $('.modal-trigger').leanModal();
       },
-      saveProduct:function(product){
+      saveProduct:function(product){  
+        this.$http.post('api/product',product);
         this.dataProduct.push({
           'name'  :product.name,
           'stock' :product.stock,

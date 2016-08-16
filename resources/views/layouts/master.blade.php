@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_token" id="_token" value="{!! csrf_token() !!}">
   <title></title>
 </head>
+
  <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
   <body>
 
@@ -22,8 +24,6 @@
 
 
 <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
-
-
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> -->
 
  <!-- Compiled and minified CSS -->
