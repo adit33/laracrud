@@ -18,4 +18,5 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('product','ProductController@index');
 Route::post('api/product','ProductController@store');
 Route::get('api','ProductController@apiIndex');
+Route::DELETE('product/delete/{id}','ProductController@destroy');
 });

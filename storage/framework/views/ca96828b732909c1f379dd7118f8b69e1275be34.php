@@ -5,6 +5,7 @@
 Hello {{ nama }}
   <a class="modal-trigger btn-floating btn-large waves-effect waves-light red" @click="addProduct" href="#modal1">Add<i class="material-icons"></i></a>
 
+
    <table class="striped">
         <thead>
           <tr>
@@ -80,9 +81,8 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
     methods: {
       getProduct:function(){
         this.$http.get('api')
-          .then(function(data){
-            console.log(data)
-            this.$set('dataProduct',data);
+          .then(function(response){
+            this.$set('dataProduct',response.data);
         });
     },
       addProduct:function(){
@@ -119,6 +119,8 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
         if(result){
           this.index = this.dataProduct.indexOf(product);
           this.dataProduct.splice(this.index,1);
+          this.$http.delete('product/delete/'+product.id);
+          this.getProduct();
         }
       }
     }
