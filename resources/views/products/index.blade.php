@@ -1,8 +1,10 @@
  @extends('layouts.master')
 
  @section('content')
-<div id="product">  <!-- Modal Trigger -->
-Hello @{{ inputDataProduct }}
+<div id="product">
+ 
+<validator name='validation'>
+
   <a class="modal-trigger btn-floating btn-large waves-effect waves-light red" @click="addProduct" href="#modal1">Add<i class="material-icons"></i></a>
 
 
@@ -36,16 +38,26 @@ Hello @{{ inputDataProduct }}
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
-          <input id="name" type="text" class="validate" v-model='inputDataProduct.name'>
+          <input id="name" type="text" class="validate" v-validate:name="['required']" v-model='inputDataProduct.name'>
           <label for="name">Product Name</label>
         </div>
+        <div>
+          <label for="name" data-error="wrong" data-success="right" v-if="$validation.name.required">Name Product cannot empty
+        </div>
+
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="stock" type="number" class="validate" v-model='inputDataProduct.stock'>
+          <input id="stock" type="number" class="validate" v-validate:stock="{required:true,min:1}" v-model='inputDataProduct.stock'>
           <label for="stock">Stock</label>
         </div>
+        <div>
+          <label v-if="$validation.stock.required">Stock cannot be empty</label>
+          <label v-if="$validation.stock.min">Stock canot lower than 1</label>
+        </div>
       </div>
+
+
       <div class="row">
         <div class="input-field col s12">
           <input id="price" type="number" class="validate" v-model='inputDataProduct.price'>
@@ -60,6 +72,7 @@ Hello @{{ inputDataProduct }}
        <a v-else="enable" class="waves-effect waves-light btn" @click="updateProduct(inputDataProduct)">Update</a>
     </div>
   </div>
+  </validator>
   </div>
 
 @push('script')
