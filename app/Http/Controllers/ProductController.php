@@ -32,4 +32,11 @@ class ProductController extends Controller
         $product->delete();
     }
 
+    public function update(Request $request,$id)
+    {
+        Product::where('id','=',$id)
+        ->update($request->all());
+
+    }
+
 }

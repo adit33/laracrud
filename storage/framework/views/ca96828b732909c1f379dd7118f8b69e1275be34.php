@@ -2,7 +2,7 @@
 
  <?php $__env->startSection('content'); ?>
 <div id="product">  <!-- Modal Trigger -->
-Hello {{ nama }}
+Hello {{ inputDataProduct }}
   <a class="modal-trigger btn-floating btn-large waves-effect waves-light red" @click="addProduct" href="#modal1">Add<i class="material-icons"></i></a>
 
 
@@ -102,7 +102,9 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
       editProduct:function(product){
         $('.modal-trigger').leanModal();
         this.enable=false;
+        this.inputDataProduct={};
         this.index=this.dataProduct.indexOf(product);
+        this.inputDataProduct.id=product.id;
         this.inputDataProduct.name=product.name;
         this.inputDataProduct.stock=product.stock;
         this.inputDataProduct.price=product.price;
@@ -111,7 +113,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
         this.dataProduct[this.index].name=product.name;
         this.dataProduct[this.index].stock=product.stock;
         this.dataProduct[this.index].price=product.price;
-        //this.inputDataProduct={};
+        this.$http.patch('product/edit/'+product.id,product);
         $('#modal1').closeModal();
       },
       deleteProduct:function(product){
@@ -120,7 +122,6 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
           this.index = this.dataProduct.indexOf(product);
           this.dataProduct.splice(this.index,1);
           this.$http.delete('product/delete/'+product.id);
-          this.getProduct();
         }
       }
     }

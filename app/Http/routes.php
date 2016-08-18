@@ -19,4 +19,5 @@ Route::get('product','ProductController@index');
 Route::post('api/product','ProductController@store');
 Route::get('api','ProductController@apiIndex');
 Route::DELETE('product/delete/{id}','ProductController@destroy');
+Route::PATCH('product/edit/{id}','ProductController@update');
 });
