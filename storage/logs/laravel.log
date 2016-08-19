@@ -2528,3 +2528,11 @@ Stack trace:
 #17 /var/www/html/laracrud/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(99): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #18 /var/www/html/laracrud/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #19 {main}  
+[2016-08-18 08:41:01] local.ERROR: exception 'ErrorException' with message 'file_put_contents(): Only 0 of 277 bytes written, possibly out of free disk space' in /var/www/html/laracrud/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:111
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'file_put_conten...', '/var/www/html/l...', 111, Array)
+#1 /var/www/html/laracrud/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(111): file_put_contents('/var/www/html/l...', 'a:4:{s:6:"_toke...', 2)
+#2 /var/www/html/laracrud/vendor/laravel/framework/src/Illuminate/Session/FileSessionHandler.php(83): Illuminate\Filesystem\Filesystem->put('/var/www/html/l...', 'a:4:{s:6:"_toke...', true)
+#3 /var/www/html/laracrud/vendor/laravel/framework/src/Illuminate/Session/Store.php(262): Illuminate\Session\FileSessionHandler->write('a55910c37fc98db...', 'a:4:{s:6:"_toke...')
+#4 /var/www/html/laracrud/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(88): Illuminate\Session\Store->save()
+#5 /var/www/html/la
