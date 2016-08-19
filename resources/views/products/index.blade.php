@@ -130,12 +130,21 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
         $('#modal1').closeModal();
       },
       deleteProduct:function(product){
-        var result = confirm('Are You sure want to delete this?');
-        if(result){
-          this.index = this.dataProduct.indexOf(product);
-          this.dataProduct.splice(this.index,1);
-          this.$http.delete('product/delete/'+product.id);
-        }
+        var self = this;
+        swal({   
+          title: "Are you sure delete this product?",   
+          //text: "You will not be able to recover this imaginary file!",   
+          type: "warning",   
+          showCancelButton: true,   
+          confirmButtonColor: "#DD6B55",   
+          confirmButtonText: "Yes, delete it!",   
+          closeOnConfirm: false 
+         },function(){
+         swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+         self.$http.delete('product/delete/'+product.id);
+         self.index = self.dataProduct.indexOf(product);
+         self.dataProduct.splice(self.index,1);
+         });
       }
     }
   })

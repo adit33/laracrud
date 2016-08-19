@@ -6,6 +6,7 @@
 </head>
 
  <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/app.css')); ?>">
+ <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/sweetalert.css')); ?>">
   <body>
 
   <nav>
