@@ -1,6 +1,12 @@
  @extends('layouts.master')
 
  @section('content')
+
+<div id="notifications"></div>
+ 
+
+
+
 <div id="product">
  
 <validator name='validation'>
@@ -76,6 +82,7 @@
   </div>
 
 @push('script')
+
 <script type="text/javascript">
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getAttribute('value');
   new Vue({
@@ -102,6 +109,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
         this.enable = true;
         this.inputDataProduct = {};
          $('.modal-trigger').leanModal();
+
       },
       saveProduct:function(product){  
         this.$http.post('api/product',product);
@@ -111,6 +119,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
           'price' :product.price
         })
         $('#modal1').closeModal();
+         Materialize.toast(product.name+' Berhasil Di Simpan', 4000)
       },
       editProduct:function(product){
         $('.modal-trigger').leanModal();
@@ -150,6 +159,24 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
   })
 
   </script>
+
+<script src="//cdn.socket.io/socket.io-1.3.5.js"></script>
+<script>
+  var socket = io('http://localhost:9090');
+   
+  socket.on('product_registration', function (msg) {
+    console.log(msg);
+    
+    var notif = document.getElementById('notifications');
+ 
+    var div = document.createElement('div');
+ 
+    div.innerHTML = msg.name + '('+ msg.price +') baru saja di tambah';
+ 
+    notif.appendChild(div);
+  });
+</script>
+
   @endpush
  
 @endsection

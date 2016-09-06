@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Product;
 
+use App\Events\ProductRegistrationEvent;
+
 class ProductController extends Controller
 {
     public function index()
@@ -17,7 +19,10 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $data=$request->all();
     	Product::create($request->all());
+
+        event(new ProductRegistrationEvent($data));
     }
 
     public function apiIndex()
